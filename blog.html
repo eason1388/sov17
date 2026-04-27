@@ -151,7 +151,7 @@
       <h1>道法專欄</h1>
       <p class="sub">你原本的文章都在，只是換成更像部落格的閱讀節奏：先找主題，再慢慢讀深。</p>
       <div class="hero-visual" aria-hidden="true">
-        <img src="assets/hero.svg" alt="" />
+        <img src="assets/photos/hero.jpg" alt="隨緣堂主視覺：晨光、香煙與筆記" />
       </div>
 
       <div class="toolbar">
@@ -208,57 +208,21 @@
     var items=[];
     var activeCol='道法';
 
-    function coverDataUri(item){
+    function coverSrc(item){
       var seed=String(item && (item.id || item.title || item.url) || 'suiyuan');
-      var t1=String((item && item.column) || '隨緣堂');
-      var t2=String((item && item.tags && item.tags[1]) || '玄門');
-      var a=hash(seed)%360;
-      var b=(a+56)%360;
-      var c=(a+112)%360;
-      var svg=
-        '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"540\" viewBox=\"0 0 960 540\">'+
-          '<defs>'+
-            '<linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">'+
-              '<stop offset=\"0\" stop-color=\"hsl('+a+',25%,14%)\"/>'+
-              '<stop offset=\"0.55\" stop-color=\"hsl('+b+',22%,16%)\"/>'+
-              '<stop offset=\"1\" stop-color=\"hsl('+c+',22%,18%)\"/>'+
-            '</linearGradient>'+
-            '<radialGradient id=\"r\" cx=\"72%\" cy=\"26%\" r=\"72%\">'+
-              '<stop offset=\"0\" stop-color=\"rgba(217,180,90,.34)\"/>'+
-              '<stop offset=\"0.35\" stop-color=\"rgba(31,143,149,.16)\"/>'+
-              '<stop offset=\"1\" stop-color=\"rgba(0,0,0,0)\"/>'+
-            '</radialGradient>'+
-            '<filter id=\"grain\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\">'+
-              '<feTurbulence type=\"fractalNoise\" baseFrequency=\".95\" numOctaves=\"2\" stitchTiles=\"stitch\"/>'+
-              '<feColorMatrix type=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .12 0\"/>'+
-            '</filter>'+
-            '<linearGradient id=\"line\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">'+
-              '<stop offset=\"0\" stop-color=\"rgba(255,255,255,0)\"/>'+
-              '<stop offset=\"0.25\" stop-color=\"rgba(255,255,255,.08)\"/>'+
-              '<stop offset=\"0.75\" stop-color=\"rgba(255,255,255,.08)\"/>'+
-              '<stop offset=\"1\" stop-color=\"rgba(255,255,255,0)\"/>'+
-            '</linearGradient>'+
-          '</defs>'+
-          '<rect width=\"960\" height=\"540\" fill=\"url(#g)\"/>'+
-          '<rect width=\"960\" height=\"540\" fill=\"url(#r)\"/>'+
-          '<rect width=\"960\" height=\"540\" filter=\"url(#grain)\" opacity=\".9\"/>'+
-          '<g fill=\"none\" stroke=\"url(#line)\" stroke-width=\"2\" opacity=\".9\">'+
-            '<path d=\"M-30 190 C150 150 300 150 430 180 C590 214 720 214 900 176\"/>'+
-            '<path d=\"M-30 248 C140 210 320 210 480 236 C640 262 760 262 930 234\" opacity=\".75\"/>'+
-            '<path d=\"M-30 308 C160 270 340 270 520 300 C680 326 800 326 940 296\" opacity=\".55\"/>'+
-          '</g>'+
-          '<g opacity=\".92\" font-family=\"Noto Serif TC,serif\" font-weight=\"900\">'+
-            '<text x=\"44\" y=\"74\" font-size=\"24\" fill=\"rgba(255,255,255,.78)\" letter-spacing=\"6\">'+escSvg(t1)+'</text>'+
-            '<text x=\"44\" y=\"122\" font-size=\"40\" fill=\"rgba(217,180,90,.92)\" letter-spacing=\"10\">'+escSvg(t2)+'</text>'+
-          '</g>'+
-          '<g opacity=\".55\">'+
-            '<circle cx=\"830\" cy=\"100\" r=\"54\" fill=\"none\" stroke=\"rgba(255,255,255,.14)\" stroke-width=\"2\"/>'+
-            '<circle cx=\"830\" cy=\"100\" r=\"36\" fill=\"none\" stroke=\"rgba(31,143,149,.20)\" stroke-width=\"2\"/>'+
-          '</g>'+
-        '</svg>';
-      return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var covers=[
+        'assets/photos/cover-01-desk.jpg',
+        'assets/photos/cover-02-temple.jpg',
+        'assets/photos/cover-03-talisman.jpg',
+        'assets/photos/cover-04-mountain.jpg',
+        'assets/photos/cover-05-meditation.jpg',
+        'assets/photos/cover-06-tea.jpg',
+        'assets/photos/cover-07-night.jpg',
+        'assets/photos/cover-08-chime.jpg'
+      ];
+      var idx=hash(seed)%covers.length;
+      return covers[idx];
     }
-    function escSvg(s){return String(s).replace(/[&<>]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]);});}
     function hash(str){
       var h=2166136261;
       for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}
@@ -292,7 +256,7 @@
 
       grid.innerHTML = filtered.map(function(x){
         var tags=(x.tags||[]).slice(0,6).map(function(t){return '<span class="tag">'+escapeHtml(String(t))+'</span>';}).join('');
-        var cover=coverDataUri(x);
+        var cover=coverSrc(x);
         return (
           '<a class="card" href="'+escapeAttr(x.url)+'">'
  +         '<div class="card-cover"><img alt="" loading="lazy" src="'+escapeAttr(cover)+'"/></div>'
