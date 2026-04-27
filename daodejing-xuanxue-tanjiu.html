@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>《道德經》：由淺入深的玄學探究 | 道法專欄 | 隨緣堂</title>
@@ -842,6 +842,15 @@ h1{font-family:"Noto Serif TC",serif;font-size:clamp(2rem,5vw,3.2rem);line-heigh
  if(og) og.setAttribute('content',href);
  var ld=document.querySelector('script[type="application/ld+json"]');
  if(ld){try{var data=JSON.parse(ld.textContent);data.mainEntityOfPage={"@type":"WebPage","@id":href};ld.textContent=JSON.stringify(data);}catch(e){}}
+  try{
+    if(!document.getElementById('sov17-modern-article-loader')){
+      var s=document.createElement('script');
+      s.id='sov17-modern-article-loader';
+      s.src='assets/modern-article.js';
+      s.defer=true;
+      document.body.appendChild(s);
+    }
+  }catch(e){}
 })();
 </script>
 </body></html>

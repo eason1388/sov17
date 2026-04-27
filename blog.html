@@ -208,9 +208,8 @@
     var items=[];
     var activeCol='道法';
 
-    function coverSrc(item){
-      var seed=String(item && (item.id || item.title || item.url) || 'suiyuan');
-      var covers=[
+    function coverPool(){
+      return [
         'assets/photos/cover-01-desk.jpg',
         'assets/photos/cover-02-temple.jpg',
         'assets/photos/cover-03-talisman.jpg',
@@ -218,10 +217,50 @@
         'assets/photos/cover-05-meditation.jpg',
         'assets/photos/cover-06-tea.jpg',
         'assets/photos/cover-07-night.jpg',
-        'assets/photos/cover-08-chime.jpg'
+        'assets/photos/cover-08-chime.jpg',
+        'assets/photos/cover-09.jpg',
+        'assets/photos/cover-10.jpg',
+        'assets/photos/cover-11.jpg',
+        'assets/photos/cover-12.jpg',
+        'assets/photos/cover-13.jpg',
+        'assets/photos/cover-14.jpg',
+        'assets/photos/cover-15.jpg',
+        'assets/photos/cover-16.jpg',
+        'assets/photos/cover-17.jpg',
+        'assets/photos/cover-18.jpg',
+        'assets/photos/cover-19.jpg',
+        'assets/photos/cover-20.jpg',
+        'assets/photos/cover-21.jpg',
+        'assets/photos/cover-22.jpg',
+        'assets/photos/cover-23.jpg',
+        'assets/photos/cover-24.jpg',
+        'assets/photos/cover-25.jpg',
+        'assets/photos/cover-26.jpg',
+        'assets/photos/cover-27.jpg',
+        'assets/photos/cover-28.jpg',
+        'assets/photos/cover-29.jpg',
+        'assets/photos/cover-30.jpg',
+        'assets/photos/cover-31.jpg',
+        'assets/photos/cover-32.jpg',
+        'assets/photos/cover-33.jpg',
+        'assets/photos/cover-34.jpg',
+        'assets/photos/cover-35.jpg',
+        'assets/photos/cover-36.jpg',
+        'assets/photos/cover-37.jpg',
+        'assets/photos/cover-38.jpg',
+        'assets/photos/cover-39.jpg',
+        'assets/photos/cover-40.jpg'
       ];
-      var idx=hash(seed)%covers.length;
-      return covers[idx];
+    }
+    function shuffledCoverPool(seed){
+      var arr=coverPool().slice();
+      var s=hash(String(seed||'suiyuan'))>>>0;
+      for(var i=arr.length-1;i>0;i--){
+        s = (s * 1664525 + 1013904223)>>>0;
+        var j = s % (i+1);
+        var tmp=arr[i]; arr[i]=arr[j]; arr[j]=tmp;
+      }
+      return arr;
     }
     function hash(str){
       var h=2166136261;
@@ -254,9 +293,10 @@
         })
         .sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
 
-      grid.innerHTML = filtered.map(function(x){
+      var covers=shuffledCoverPool(activeCol+'|'+q+'|'+filtered.length);
+      grid.innerHTML = filtered.map(function(x,i){
         var tags=(x.tags||[]).slice(0,6).map(function(t){return '<span class="tag">'+escapeHtml(String(t))+'</span>';}).join('');
-        var cover=coverSrc(x);
+        var cover=covers[i % covers.length];
         return (
           '<a class="card" href="'+escapeAttr(x.url)+'">'
  +         '<div class="card-cover"><img alt="" loading="lazy" src="'+escapeAttr(cover)+'"/></div>'
