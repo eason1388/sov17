@@ -29,6 +29,7 @@
       --teal:#1f8f95;
       --card:#ffffff;
       --shadow:0 18px 50px rgba(31,42,68,.10);
+      --shadow2:0 26px 80px rgba(31,42,68,.14);
       --radius:22px;
       --max:1120px;
     }
@@ -60,6 +61,15 @@
     .kicker{display:inline-flex; align-items:center; gap:10px; padding:8px 14px; border:1px solid rgba(177,138,42,.25); background:rgba(255,255,255,.55); border-radius:999px; color:var(--gold); letter-spacing:.18em; font-size:.82rem; font-weight:900}
     h1{font-family:"Noto Serif TC",serif; font-weight:900; font-size:clamp(2.0rem, 4.6vw, 3.0rem); line-height:1.25; margin:16px 0 10px; letter-spacing:.08em}
     .sub{color:rgba(31,42,68,.72); max-width:48rem; margin:0}
+    .hero-visual{
+      margin-top:18px;
+      border-radius:calc(var(--radius) + 10px);
+      overflow:hidden;
+      border:1px solid rgba(31,42,68,.10);
+      background:rgba(255,255,255,.70);
+      box-shadow:var(--shadow2);
+    }
+    .hero-visual img{display:block;width:100%;height:auto}
 
     .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:22px 0 12px}
     .search{flex:1; min-width:240px; display:flex; gap:10px; align-items:center; background:rgba(255,255,255,.72); border:1px solid var(--line); border-radius:999px; padding:10px 14px; box-shadow:var(--shadow)}
@@ -68,9 +78,27 @@
     .chip{border:1px solid rgba(31,42,68,.14); background:rgba(255,255,255,.68); padding:8px 12px; border-radius:999px; font-weight:900; color:rgba(31,42,68,.78); cursor:pointer}
     .chip.active{border-color:rgba(31,143,149,.30); background:rgba(31,143,149,.08); color:var(--teal)}
 
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:10px 0 42px}
-    .card{background:rgba(255,255,255,.74); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 18px; transition:transform .25s ease, box-shadow .25s ease}
+    .layout{display:grid; grid-template-columns:1fr 360px; gap:22px; padding:10px 0 42px; align-items:start}
+    .grid{display:grid; grid-template-columns:1fr; gap:18px}
+    .card{background:rgba(255,255,255,.74); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; transition:transform .25s ease, box-shadow .25s ease}
     .card:hover{transform:translateY(-3px); box-shadow:0 22px 60px rgba(31,42,68,.14)}
+    .card-cover{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border-radius:18px;
+      border:1px solid rgba(31,42,68,.10);
+      overflow:hidden;
+      background:rgba(255,255,255,.72);
+      margin-bottom:12px;
+      position:relative;
+    }
+    .card-cover img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-cover::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(31,42,68,0) 45%, rgba(31,42,68,.10) 100%);
+      pointer-events:none;
+    }
     .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center; color:rgba(31,42,68,.62); font-size:.88rem}
     .pill{display:inline-flex; align-items:center; padding:4px 10px; border-radius:999px; border:1px solid rgba(177,138,42,.20); color:var(--gold); background:rgba(255,255,255,.65); font-weight:900; letter-spacing:.10em; font-size:.76rem}
     .card h2{margin:10px 0 8px; font-family:"Noto Serif TC",serif; letter-spacing:.06em; line-height:1.4; font-size:1.22rem}
@@ -78,10 +106,24 @@
     .tags{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px}
     .tag{font-size:.78rem; color:rgba(31,42,68,.62); border:1px solid rgba(31,42,68,.12); background:rgba(255,255,255,.62); padding:4px 10px; border-radius:999px}
 
+    .sidebar{position:sticky; top:86px; display:grid; gap:14px}
+    .sidebox{background:rgba(255,255,255,.72); border:1px solid var(--line); border-radius:calc(var(--radius) + 6px); box-shadow:var(--shadow2); padding:16px}
+    .sidebox h3{margin:0 0 10px; font-family:"Noto Serif TC",serif; letter-spacing:.10em}
+    .sidebox p{margin:0; color:rgba(31,42,68,.70)}
+    .sidebox .field{display:flex; gap:10px; margin-top:10px}
+    .sidebox input{border-radius:16px}
+    .sidebox button{border:1px solid rgba(31,143,149,.30); background:rgba(31,143,149,.08); color:var(--teal); font-weight:900; border-radius:16px; padding:10px 12px; cursor:pointer}
+    .hotlist{margin:10px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+    .hotlist a{display:block; padding:10px 12px; border-radius:16px; border:1px solid rgba(31,42,68,.10); background:rgba(255,255,255,.62)}
+    .hotlist a:hover{border-color:rgba(31,143,149,.28)}
+
     footer{padding:22px 0 50px; color:rgba(31,42,68,.66); text-align:center}
     .footer-links{display:flex; justify-content:center; gap:12px 18px; flex-wrap:wrap; margin-bottom:10px}
 
-    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    @media (max-width:980px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:static}
+    }
     @media (max-width:820px){.navlinks{gap:12px; font-size:.92rem}}
   </style>
 </head>
@@ -106,6 +148,9 @@
       <div class="kicker">✦ 文章總覽　可搜尋可篩選 ✦</div>
       <h1>道法專欄</h1>
       <p class="sub">你原本的文章都在，只是換成更像部落格的閱讀節奏：先找主題，再慢慢讀深。</p>
+      <div class="hero-visual" aria-hidden="true">
+        <img src="assets/hero.svg" alt="" />
+      </div>
 
       <div class="toolbar">
         <div class="search" role="search">
@@ -119,8 +164,32 @@
       </div>
     </header>
 
-    <section>
-      <div class="grid" id="grid" aria-live="polite"></div>
+    <section class="layout">
+      <div>
+        <div class="grid" id="grid" aria-live="polite"></div>
+      </div>
+      <aside class="sidebar" aria-label="側欄">
+        <div class="sidebox">
+          <h3>搜尋</h3>
+          <p>用關鍵字快速定位：符法、養氣、回光、齋戒…</p>
+          <div class="field">
+            <input id="q2" type="search" placeholder="Search…" autocomplete="off" />
+            <button type="button" id="q2Btn">查找</button>
+          </div>
+        </div>
+        <div class="sidebox">
+          <h3>訂閱更新</h3>
+          <p>留下 Email，我們用回信方式把最新文章寄給你。</p>
+          <div class="field">
+            <input id="subEmail" type="email" placeholder="Email" autocomplete="email" />
+            <button type="button" id="subBtn">訂閱</button>
+          </div>
+        </div>
+        <div class="sidebox">
+          <h3>近期更新</h3>
+          <ul class="hotlist" id="recentList"></ul>
+        </div>
+      </aside>
     </section>
 
     <footer>
@@ -136,6 +205,49 @@
   <script>
     var items=[];
     var activeCol='道法';
+
+    function coverDataUri(item){
+      var seed=String(item && (item.id || item.title || item.url) || 'suiyuan');
+      var t1=String((item && item.column) || '隨緣堂');
+      var t2=String((item && item.tags && item.tags[1]) || '玄門');
+      var a=hash(seed)%360;
+      var b=(a+68)%360;
+      var svg=
+        '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"540\" viewBox=\"0 0 960 540\">'+
+          '<defs>'+
+            '<linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">'+
+              '<stop offset=\"0\" stop-color=\"hsl('+a+',55%,88%)\"/>'+
+              '<stop offset=\"1\" stop-color=\"hsl('+b+',55%,86%)\"/>'+
+            '</linearGradient>'+
+            '<radialGradient id=\"r\" cx=\"72%\" cy=\"28%\" r=\"70%\">'+
+              '<stop offset=\"0\" stop-color=\"rgba(31,143,149,.26)\"/>'+
+              '<stop offset=\"1\" stop-color=\"rgba(31,42,68,0)\"/>'+
+            '</radialGradient>'+
+          '</defs>'+
+          '<rect width=\"960\" height=\"540\" fill=\"url(#g)\"/>'+
+          '<rect width=\"960\" height=\"540\" fill=\"url(#r)\"/>'+
+          '<g opacity=\".26\">'+
+            '<path d=\"M-20 396 C120 316 240 316 340 368 C430 410 560 434 690 376 C790 336 860 336 980 376 L980 580 L-20 580 Z\" fill=\"rgba(31,42,68,.18)\"/>'+
+            '<path d=\"M-20 440 C120 372 250 372 360 424 C468 476 620 500 760 454 C860 422 900 422 980 454 L980 580 L-20 580 Z\" fill=\"rgba(31,42,68,.12)\"/>'+
+          '</g>'+
+          '<g font-family=\"Noto Serif TC,serif\" font-weight=\"900\" opacity=\".92\">'+
+            '<text x=\"44\" y=\"78\" font-size=\"26\" fill=\"rgba(31,42,68,.72)\" letter-spacing=\"6\">'+escSvg(t1)+'</text>'+
+            '<text x=\"44\" y=\"124\" font-size=\"42\" fill=\"rgba(177,138,42,.82)\" letter-spacing=\"10\">'+escSvg(t2)+'</text>'+
+          '</g>'+
+          '<g opacity=\".22\">'+
+            '<circle cx=\"822\" cy=\"102\" r=\"58\" fill=\"none\" stroke=\"rgba(31,42,68,.28)\" stroke-width=\"2\"/>'+
+            '<circle cx=\"822\" cy=\"102\" r=\"38\" fill=\"none\" stroke=\"rgba(31,143,149,.22)\" stroke-width=\"2\"/>'+
+            '<path d=\"M822 62 C842 62 854 78 854 92 C854 104 846 114 834 120 C822 126 814 134 814 148\" fill=\"none\" stroke=\"rgba(177,138,42,.28)\" stroke-width=\"2.5\"/>'+
+          '</g>'+
+        '</svg>';
+      return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+    }
+    function escSvg(s){return String(s).replace(/[&<>]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]);});}
+    function hash(str){
+      var h=2166136261;
+      for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}
+      return h>>>0;
+    }
 
     function escapeHtml(s){
       return s.replace(/[&<>"']/g,function(c){
@@ -164,13 +276,15 @@
 
       grid.innerHTML = filtered.map(function(x){
         var tags=(x.tags||[]).slice(0,6).map(function(t){return '<span class="tag">'+escapeHtml(String(t))+'</span>';}).join('');
+        var cover=coverDataUri(x);
         return (
           '<a class="card" href="'+escapeAttr(x.url)+'">'
-+           '<div class="meta"><span class="pill">'+escapeHtml(String(x.column||'專欄'))+'</span><span>'+escapeHtml(String(x.date||''))+'</span></div>'
-+           '<h2>'+escapeHtml(String(x.title||''))+'</h2>'
-+           '<p class="excerpt">'+escapeHtml(String(x.excerpt||''))+'</p>'
-+           '<div class="tags">'+tags+'</div>'
-+         '</a>'
+ +         '<div class="card-cover"><img alt="" loading="lazy" src="'+escapeAttr(cover)+'"/></div>'
+ +           '<div class="meta"><span class="pill">'+escapeHtml(String(x.column||'專欄'))+'</span><span>'+escapeHtml(String(x.date||''))+'</span></div>'
+ +           '<h2>'+escapeHtml(String(x.title||''))+'</h2>'
+ +           '<p class="excerpt">'+escapeHtml(String(x.excerpt||''))+'</p>'
+ +           '<div class="tags">'+tags+'</div>'
+ +         '</a>'
         );
       }).join('');
 
@@ -193,6 +307,11 @@
         window.__qTimer = window.setTimeout(render, 80);
       });
 
+      var q2=document.getElementById('q2');
+      var q2Btn=document.getElementById('q2Btn');
+      if(q2){q2.addEventListener('input', function(){document.getElementById('q').value=q2.value; render();});}
+      if(q2Btn){q2Btn.addEventListener('click', function(){document.getElementById('q').value=q2 ? q2.value : ''; render();});}
+
       document.querySelectorAll('.chip').forEach(function(btn){
         btn.addEventListener('click', function(){
           setActiveChip(btn.getAttribute('data-col'));
@@ -201,10 +320,33 @@
 
       fetch('articles.json', {cache:'no-store'})
         .then(function(r){return r.json();})
-        .then(function(data){items=data||[]; render();})
+        .then(function(data){
+          items=data||[];
+          render();
+          var recent=(items||[]).slice().sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));}).slice(0,5);
+          var recentList=document.getElementById('recentList');
+          if(recentList){
+            recentList.innerHTML = recent.map(function(x){
+              return '<li><a href="'+escapeAttr(x.url)+'"><div class="meta"><span class="pill">'+escapeHtml(String(x.column||'專欄'))+'</span><span>'+escapeHtml(String(x.date||''))+'</span></div><div style="margin-top:8px;font-weight:900">'+escapeHtml(String(x.title||''))+'</div></a></li>';
+            }).join('');
+          }
+        })
         .catch(function(){
           document.getElementById('grid').innerHTML = '<div class="card"><div class="meta"><span class="pill">錯誤</span></div><h2>文章載入失敗</h2><p class="excerpt">請稍後再試。</p></div>';
         });
+
+      var subBtn=document.getElementById('subBtn');
+      var subEmail=document.getElementById('subEmail');
+      if(subBtn && subEmail){
+        subBtn.addEventListener('click', function(){
+          var email=(subEmail.value||'').trim();
+          if(!email){subEmail.focus(); return;}
+          var subject=encodeURIComponent('隨緣堂｜訂閱更新');
+          var body=encodeURIComponent('我想訂閱隨緣堂更新\n\nEmail：'+email+'\n\n（此信由網站側欄訂閱欄位產生）');
+          window.location.href='mailto:jackkok1888@gmail.com?subject='+subject+'&body='+body;
+          subEmail.value='';
+        });
+      }
     })();
   </script>
 </body>

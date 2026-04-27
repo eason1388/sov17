@@ -29,6 +29,7 @@
       --teal:#1f8f95;
       --card:#ffffff;
       --shadow:0 18px 50px rgba(31,42,68,.10);
+      --shadow2:0 26px 80px rgba(31,42,68,.14);
       --radius:22px;
       --max:1120px;
     }
@@ -100,7 +101,7 @@
       pointer-events:none;
       filter:blur(0px);
     }
-    .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:34px; align-items:center; position:relative}
+    .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:26px; align-items:center; position:relative}
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 14px;
@@ -136,12 +137,44 @@
     .btn:hover{transform:translateY(-1px); box-shadow:0 14px 30px rgba(31,42,68,.10)}
 
     .panel{
-      background:rgba(255,255,255,.68);
+      background:rgba(255,255,255,.72);
       border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      border-radius:calc(var(--radius) + 6px);
+      box-shadow:var(--shadow2);
       padding:22px;
     }
+    .hero-media{
+      position:relative;
+      border-radius:calc(var(--radius) + 10px);
+      overflow:hidden;
+      border:1px solid rgba(31,42,68,.10);
+      background:rgba(255,255,255,.65);
+      box-shadow:var(--shadow2);
+      min-height:340px;
+    }
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-media::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(31,143,149,.24), transparent 48%),
+        radial-gradient(circle at 84% 26%, rgba(217,180,90,.18), transparent 52%),
+        linear-gradient(180deg, rgba(255,255,255,.0), rgba(31,42,68,.05));
+      pointer-events:none;
+    }
+    .hero-caption{
+      position:absolute; left:16px; bottom:14px;
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.55);
+      background:rgba(255,255,255,.72);
+      backdrop-filter:blur(10px);
+      color:rgba(31,42,68,.78);
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+    .hero-caption span{font-family:"Noto Serif TC",serif; color:var(--gold); letter-spacing:.10em}
     .panel h3{margin:0 0 10px; font-family:"Noto Serif TC",serif; letter-spacing:.08em}
     .panel p{margin:0; color:rgba(31,42,68,.72)}
     .mini-list{margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px}
@@ -172,7 +205,7 @@
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:20px 18px;
+      padding:18px;
       transition:transform .25s ease, box-shadow .25s ease;
     }
     .card:hover{transform:translateY(-3px); box-shadow:0 22px 60px rgba(31,42,68,.14)}
@@ -182,6 +215,23 @@
     .excerpt{margin:0; color:rgba(31,42,68,.74)}
     .tags{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px}
     .tag{font-size:.78rem; color:rgba(31,42,68,.62); border:1px solid rgba(31,42,68,.12); background:rgba(255,255,255,.62); padding:4px 10px; border-radius:999px}
+    .card-cover{
+      width:100%;
+      aspect-ratio:16/10;
+      border-radius:18px;
+      border:1px solid rgba(31,42,68,.10);
+      overflow:hidden;
+      background:rgba(255,255,255,.72);
+      margin-bottom:12px;
+      position:relative;
+    }
+    .card-cover img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-cover::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(31,42,68,0) 45%, rgba(31,42,68,.10) 100%);
+      pointer-events:none;
+    }
 
     .channels .card{padding:22px}
     .channel-head{display:flex; align-items:center; gap:12px}
@@ -237,6 +287,7 @@
       .navlinks{display:none}
       .hamburger{display:inline-flex}
       .navlinks.open{display:flex; flex-direction:column; align-items:flex-start; gap:10px; padding:12px 0}
+      .hero-media{min-height:260px}
     }
   </style>
 </head>
@@ -272,15 +323,10 @@
             <a class="btn" href="#consult">預約初診</a>
           </div>
         </div>
-        <aside class="panel" aria-label="導讀">
-          <h3>初來可從這裡開始</h3>
-          <p>不急著求奇，先把路走穩。以下三條線索，能讓你更快找到適合自己的閱讀方向。</p>
-          <ul class="mini-list">
-            <li><span class="dot"></span><div><strong>修持</strong>：守一、回光、調息、養氣，先求中定。</div></li>
-            <li><span class="dot"></span><div><strong>符法</strong>：符膽、正氣、立界，先明其理再談其用。</div></li>
-            <li><span class="dot"></span><div><strong>經典</strong>：陰符經與太乙，讀經不是背句子，是校正心法。</div></li>
-          </ul>
-        </aside>
+        <div class="hero-media" aria-label="主視覺">
+          <img src="assets/hero.svg" alt="隨緣堂主視覺：山嵐與符氣" />
+          <div class="hero-caption"><span>隨緣堂</span><div>修為・養氣・濟世・解厄</div></div>
+        </div>
       </div>
     </section>
 
@@ -443,18 +489,63 @@
         var top=items.slice(0,6);
         grid.innerHTML = top.map(function(x){
           var tags=(x.tags||[]).slice(0,4).map(function(t){return '<span class="tag">'+escapeHtml(String(t))+'</span>';}).join('');
+          var cover=coverDataUri(x);
           return (
             '<a class="card" href="'+escapeAttr(x.url)+'">'
-+             '<div class="meta"><span class="pill">'+escapeHtml(String(x.column||'專欄'))+'</span><span>'+escapeHtml(String(x.date||''))+'</span></div>'
-+             '<h4>'+escapeHtml(String(x.title||''))+'</h4>'
-+             '<p class="excerpt">'+escapeHtml(String(x.excerpt||'')).slice(0,110)+'</p>'
-+             '<div class="tags">'+tags+'</div>'
-+           '</a>'
++             '<div class="card-cover"><img alt="" loading="lazy" src="'+escapeAttr(cover)+'"/></div>'
+ +             '<div class="meta"><span class="pill">'+escapeHtml(String(x.column||'專欄'))+'</span><span>'+escapeHtml(String(x.date||''))+'</span></div>'
+ +             '<h4>'+escapeHtml(String(x.title||''))+'</h4>'
+ +             '<p class="excerpt">'+escapeHtml(String(x.excerpt||'')).slice(0,120)+'</p>'
+ +             '<div class="tags">'+tags+'</div>'
+ +           '</a>'
           );
         }).join('');
       }catch(e){
         grid.innerHTML='<div class="card"><div class="meta"><span class="pill">提示</span></div><h4>文章載入失敗</h4><p class="excerpt">請稍後再試，或直接前往道法專欄。</p></div>';
       }
+    }
+
+    function coverDataUri(item){
+      var seed=String(item && (item.id || item.title || item.url) || 'suiyuan');
+      var t1=String((item && item.column) || '隨緣堂');
+      var t2=String((item && item.tags && item.tags[1]) || '玄門');
+      var a=hash(seed)%360;
+      var b=(a+68)%360;
+      var svg=
+        '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"600\" viewBox=\"0 0 960 600\">'+
+          '<defs>'+
+            '<linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">'+
+              '<stop offset=\"0\" stop-color=\"hsl('+a+',55%,88%)\"/>'+
+              '<stop offset=\"1\" stop-color=\"hsl('+b+',55%,86%)\"/>'+
+            '</linearGradient>'+
+            '<radialGradient id=\"r\" cx=\"70%\" cy=\"30%\" r=\"70%\">'+
+              '<stop offset=\"0\" stop-color=\"rgba(31,143,149,.26)\"/>'+
+              '<stop offset=\"1\" stop-color=\"rgba(31,42,68,0)\"/>'+
+            '</radialGradient>'+
+          '</defs>'+
+          '<rect width=\"960\" height=\"600\" fill=\"url(#g)\"/>'+
+          '<rect width=\"960\" height=\"600\" fill=\"url(#r)\"/>'+
+          '<g opacity=\".26\">'+
+            '<path d=\"M-20 450 C120 360 240 360 340 420 C430 470 560 500 690 430 C790 378 860 378 980 430 L980 620 L-20 620 Z\" fill=\"rgba(31,42,68,.18)\"/>'+
+            '<path d=\"M-20 500 C120 420 250 420 360 478 C468 536 620 564 760 504 C860 464 900 464 980 504 L980 620 L-20 620 Z\" fill=\"rgba(31,42,68,.12)\"/>'+
+          '</g>'+
+          '<g font-family=\"Noto Serif TC,serif\" font-weight=\"900\" opacity=\".92\">'+
+            '<text x=\"44\" y=\"82\" font-size=\"28\" fill=\"rgba(31,42,68,.72)\" letter-spacing=\"6\">'+escSvg(t1)+'</text>'+
+            '<text x=\"44\" y=\"130\" font-size=\"44\" fill=\"rgba(177,138,42,.82)\" letter-spacing=\"10\">'+escSvg(t2)+'</text>'+
+          '</g>'+
+          '<g opacity=\".22\">'+
+            '<circle cx=\"820\" cy=\"110\" r=\"62\" fill=\"none\" stroke=\"rgba(31,42,68,.28)\" stroke-width=\"2\"/>'+
+            '<circle cx=\"820\" cy=\"110\" r=\"42\" fill=\"none\" stroke=\"rgba(31,143,149,.22)\" stroke-width=\"2\"/>'+
+            '<path d=\"M820 66 C842 66 856 84 856 100 C856 114 846 126 832 132 C820 138 812 146 812 160\" fill=\"none\" stroke=\"rgba(177,138,42,.28)\" stroke-width=\"2.5\"/>'+
+          '</g>'+
+        '</svg>';
+      return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+    }
+    function escSvg(s){return String(s).replace(/[&<>]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]);});}
+    function hash(str){
+      var h=2166136261;
+      for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}
+      return h>>>0;
     }
 
     function escapeHtml(s){

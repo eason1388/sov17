@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff3e0"/>
+      <stop offset="0.38" stop-color="#f3f5ff"/>
+      <stop offset="1" stop-color="#e7fbff"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="62%" cy="28%" r="45%">
+      <stop offset="0" stop-color="#d9b45a" stop-opacity=".85"/>
+      <stop offset="0.45" stop-color="#1f8f95" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#1f2a44" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ridge" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#1f2a44" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#1f2a44" stop-opacity=".02"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="ink" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.85 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#sun)"/>
+
+  <!-- mist -->
+  <g opacity=".55" filter="url(#soft)">
+    <ellipse cx="420" cy="360" rx="520" ry="220" fill="#1f8f95" opacity=".12"/>
+    <ellipse cx="1120" cy="380" rx="560" ry="240" fill="#d9b45a" opacity=".10"/>
+    <ellipse cx="820" cy="520" rx="720" ry="280" fill="#1f2a44" opacity=".06"/>
+  </g>
+
+  <!-- mountains -->
+  <path d="M-30,720 C220,520 420,520 620,650 C780,750 980,790 1210,660 C1370,570 1500,570 1640,650 L1640,1020 L-30,1020 Z" fill="url(#ridge)"/>
+  <path d="M-30,780 C180,640 360,640 560,740 C760,840 980,880 1220,770 C1380,700 1500,700 1640,770 L1640,1020 L-30,1020 Z" fill="#1f2a44" opacity=".06"/>
+
+  <!-- subtle talisman lines -->
+  <g opacity=".34" filter="url(#ink)">
+    <path d="M1060 185 C1078 220 1068 252 1048 280" fill="none" stroke="#1f8f95" stroke-width="6" stroke-linecap="round"/>
+    <path d="M1048 280 C1078 296 1102 324 1108 356" fill="none" stroke="#d9b45a" stroke-width="6" stroke-linecap="round"/>
+    <path d="M1108 356 C1084 390 1084 418 1100 450" fill="none" stroke="#1f2a44" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+
+    <path d="M380 240 C404 266 410 296 402 326" fill="none" stroke="#d9b45a" stroke-width="6" stroke-linecap="round"/>
+    <path d="M402 326 C380 356 380 386 398 420" fill="none" stroke="#1f8f95" stroke-width="6" stroke-linecap="round"/>
+    <path d="M398 420 C430 442 448 472 448 506" fill="none" stroke="#1f2a44" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  </g>
+
+  <!-- emblem -->
+  <g transform="translate(1180 650)" opacity=".22">
+    <circle cx="0" cy="0" r="132" fill="none" stroke="#1f2a44" stroke-width="2"/>
+    <circle cx="0" cy="0" r="92" fill="none" stroke="#1f8f95" stroke-width="2" opacity=".6"/>
+    <path d="M0 -78 C36 -78 58 -46 58 -18 C58 8 42 28 16 38 C-8 48 -22 62 -22 86" fill="none" stroke="#d9b45a" stroke-width="3"/>
+    <path d="M0 78 C-36 78 -58 46 -58 18 C-58 -8 -42 -28 -16 -38 C8 -48 22 -62 22 -86" fill="none" stroke="#1f8f95" stroke-width="3" opacity=".7"/>
+  </g>
+</svg>
+
