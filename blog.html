@@ -1,533 +1,211 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>道法專欄｜隨緣堂｜道教玄學文章總覽與主題篩選</title>
-  <meta name="description" content="隨緣堂道法專欄總覽，整理道教玄學、養氣、清靜、家宅、護身、祭改與修持文章，支援搜尋與標籤篩選。" />
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <meta property="og:title" content="道法專欄｜隨緣堂｜道教玄學文章總覽與主題篩選" />
-  <meta property="og:description" content="把隨緣堂既有道教玄學與修持文章整理成更好瀏覽的專欄頁，支援關鍵字搜尋與主題標籤篩選。" />
+  <title>道法專欄｜隨緣堂</title>
+  <meta name="description" content="隨緣堂道法專欄總覽：道教修持、符法觀念、氣機陰陽、內煉與玄門觀念文章整理。" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://eason1388.github.io/sov17/blog.html" />
+  <meta property="og:title" content="道法專欄｜隨緣堂" />
+  <meta property="og:description" content="道教修持、符法觀念、氣機陰陽、內煉與玄門觀念文章整理。" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eason1388.github.io/sov17/blog.html" />
   <meta property="og:site_name" content="隨緣堂" />
   <meta property="og:locale" content="zh_TW" />
-  <meta property="og:url" content="https://eason1388.github.io/sov13/blog.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://eason1388.github.io/sov13/blog.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "CollectionPage",
-        "name": "道法專欄",
-        "url": "https://eason1388.github.io/sov13/blog.html",
-        "inLanguage": "zh-TW"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "首頁",
-            "item": "https://eason1388.github.io/sov13/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "道法專欄",
-            "item": "https://eason1388.github.io/sov13/blog.html"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-  <script type="application/ld+json" id="blog-itemlist-schema">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "隨緣堂道法專欄文章列表",
-    "itemListElement": []
-  }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#07111f;
-      --panel:#10223f;
-      --panel-soft:rgba(16,34,63,.72);
-      --line:rgba(111,188,255,.16);
-      --gold:#d4b05f;
-      --gold-soft:#f3ddb0;
-      --teal:#6ad8d2;
-      --text:#edf3ff;
-      --muted:#adc0de;
-      --muted-2:#7f95b7;
-      --shadow:0 22px 70px rgba(0,0,0,.24);
-      --max:1180px;
+      --bg:#fbf6ee;
+      --bg2:#f4efe6;
+      --ink:#1f2a44;
+      --muted:#5b667f;
+      --line:rgba(31,42,68,.12);
+      --gold:#b18a2a;
+      --gold2:#d9b45a;
+      --teal:#1f8f95;
+      --card:#ffffff;
+      --shadow:0 18px 50px rgba(31,42,68,.10);
+      --radius:22px;
+      --max:1120px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:"Noto Sans TC",sans-serif;
-      color:var(--text);
+      color:var(--ink);
       background:
-        radial-gradient(circle at top, rgba(55,105,192,.25), transparent 34%),
-        linear-gradient(180deg, #09111f 0%, #060b14 100%);
-      line-height:1.8;
+        radial-gradient(circle at 12% 10%, rgba(31,143,149,.10), transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(177,138,42,.10), transparent 45%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 72%, var(--bg) 100%);
+      line-height:1.85;
+      overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
-    .wrap{width:min(var(--max), calc(100% - 32px));margin:0 auto}
-    .card{
-      background:linear-gradient(180deg, rgba(17,35,64,.94), rgba(9,18,35,.98));
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-    }
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(5,10,19,.82);
-      border-bottom:1px solid rgba(111,188,255,.1);
-    }
-    .site-nav{
-      min-height:74px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      padding:14px 0;
-    }
-    .brand{
-      font-family:"Noto Serif TC",serif;
-      font-weight:900;
-      font-size:1.75rem;
-      letter-spacing:.12em;
-      color:var(--gold);
-    }
-    .brand small{
-      display:block;
-      margin-top:-4px;
-      font-family:"Noto Sans TC",sans-serif;
-      font-size:.72rem;
-      letter-spacing:.28em;
-      color:var(--teal);
-    }
-    .nav-links{
-      display:flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:10px 18px;
-    }
-    .nav-links a{
-      color:var(--muted);
-      font-size:.96rem;
-    }
-    .nav-links .nav-cta{
-      padding:11px 16px;
-      border:1px solid rgba(106,216,210,.34);
-      border-radius:999px;
-      color:var(--teal);
-      background:rgba(106,216,210,.07);
-    }
-    .hero{
-      padding:82px 0 28px;
-    }
-    .hero-box{
-      padding:34px;
-    }
-    .eyebrow{
-      display:inline-flex;
-      padding:8px 14px;
-      border-radius:999px;
-      border:1px solid rgba(212,176,95,.24);
-      color:var(--gold-soft);
-      background:rgba(212,176,95,.06);
-      font-size:.86rem;
-      letter-spacing:.12em;
-    }
-    h1{
-      margin:18px 0 14px;
-      font-family:"Noto Serif TC",serif;
-      font-size:clamp(2.4rem, 5.2vw, 4.6rem);
-      line-height:1.15;
-      letter-spacing:.04em;
-    }
-    .hero p{
-      margin:0;
-      max-width:820px;
-      color:var(--muted);
-      font-size:1.03rem;
-    }
-    .tools{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:16px;
-      align-items:center;
-      margin-top:26px;
-    }
-    .search-wrap{
-      display:grid;
-      gap:12px;
-    }
-    .search{
-      width:100%;
-      min-height:54px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(3,8,16,.55);
-      color:var(--text);
-      padding:0 16px;
-      font:inherit;
-    }
-    .tags{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .tag-btn{
-      border:1px solid rgba(212,176,95,.24);
-      background:rgba(212,176,95,.06);
-      color:var(--gold-soft);
-      border-radius:999px;
-      min-height:40px;
-      padding:0 14px;
-      font:inherit;
-      cursor:pointer;
-    }
-    .tag-btn.active{
-      border-color:rgba(106,216,210,.4);
-      color:var(--text);
-      background:rgba(106,216,210,.12);
-    }
-    .summary{
-      color:var(--muted-2);
-      font-size:.94rem;
-      white-space:nowrap;
-    }
-    .layout{
-      display:grid;
-      grid-template-columns:1fr 300px;
-      gap:22px;
-      padding:8px 0 54px;
-    }
-    .list{
-      display:grid;
-      gap:18px;
-      align-content:start;
-    }
-    .post{
-      padding:24px;
-    }
-    .post-meta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      color:var(--teal);
-      font-size:.9rem;
-      margin-bottom:10px;
-    }
-    .post h2{
-      margin:0 0 10px;
-      font-size:1.3rem;
-      line-height:1.45;
-    }
-    .post p{
-      margin:0;
-      color:var(--muted);
-    }
-    .post-footer{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-      margin-top:18px;
-    }
-    .tag-list{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .tag-chip{
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      color:var(--muted);
-      font-size:.84rem;
-    }
-    .more{
-      color:var(--gold-soft);
-      font-weight:700;
-    }
-    .side{
-      display:grid;
-      gap:18px;
-      align-content:start;
-    }
-    .side-card{
-      padding:24px;
-    }
-    .side-card h3{
-      margin:0 0 12px;
-      font-size:1.08rem;
-      color:var(--gold-soft);
-    }
-    .side-card p,
-    .side-card li{
-      margin:0;
-      color:var(--muted);
-      font-size:.95rem;
-    }
-    .side-card ul{
-      margin:0;
-      padding-left:18px;
-      display:grid;
-      gap:10px;
-    }
-    .empty{
-      padding:28px;
-      text-align:center;
-      color:var(--muted);
-    }
-    .footer{
-      padding:0 0 46px;
-      color:var(--muted-2);
-      font-size:.92rem;
-    }
-    .footer-inner{
-      padding-top:22px;
-      border-top:1px solid rgba(255,255,255,.08);
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-    @media (max-width: 940px){
-      .layout{
-        grid-template-columns:1fr;
-      }
-      .tools{
-        grid-template-columns:1fr;
-      }
-      .summary{
-        white-space:normal;
-      }
-    }
-    @media (max-width: 640px){
-      .wrap{width:min(var(--max), calc(100% - 22px))}
-      .site-nav{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-      .hero-box,
-      .post,
-      .side-card{
-        padding:22px;
-      }
-    }
+    .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
+
+    .topbar{position:sticky; top:0; z-index:40; background:rgba(251,246,238,.86); backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:18px}
+    .brand{display:flex; flex-direction:column; font-family:"Noto Serif TC",serif; font-weight:900; letter-spacing:.14em; color:var(--gold); font-size:1.55rem; line-height:1.15}
+    .brand small{font-family:"Noto Sans TC",sans-serif; font-weight:600; letter-spacing:.32em; font-size:.72rem; color:var(--teal); margin-top:4px}
+    .navlinks{display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+    .navlinks a{color:rgba(31,42,68,.82); font-weight:700; font-size:.96rem}
+    .navlinks a:hover{color:var(--teal)}
+    .cta{padding:10px 16px; border-radius:999px; border:1px solid rgba(31,143,149,.30); background:rgba(31,143,149,.08); color:var(--teal) !important; font-weight:900}
+
+    header.hero{padding:58px 0 22px}
+    .kicker{display:inline-flex; align-items:center; gap:10px; padding:8px 14px; border:1px solid rgba(177,138,42,.25); background:rgba(255,255,255,.55); border-radius:999px; color:var(--gold); letter-spacing:.18em; font-size:.82rem; font-weight:900}
+    h1{font-family:"Noto Serif TC",serif; font-weight:900; font-size:clamp(2.0rem, 4.6vw, 3.0rem); line-height:1.25; margin:16px 0 10px; letter-spacing:.08em}
+    .sub{color:rgba(31,42,68,.72); max-width:48rem; margin:0}
+
+    .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:22px 0 12px}
+    .search{flex:1; min-width:240px; display:flex; gap:10px; align-items:center; background:rgba(255,255,255,.72); border:1px solid var(--line); border-radius:999px; padding:10px 14px; box-shadow:var(--shadow)}
+    .search input{border:0; outline:none; background:transparent; width:100%; font:inherit; color:rgba(31,42,68,.9)}
+    .filters{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{border:1px solid rgba(31,42,68,.14); background:rgba(255,255,255,.68); padding:8px 12px; border-radius:999px; font-weight:900; color:rgba(31,42,68,.78); cursor:pointer}
+    .chip.active{border-color:rgba(31,143,149,.30); background:rgba(31,143,149,.08); color:var(--teal)}
+
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:10px 0 42px}
+    .card{background:rgba(255,255,255,.74); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 18px; transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-3px); box-shadow:0 22px 60px rgba(31,42,68,.14)}
+    .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center; color:rgba(31,42,68,.62); font-size:.88rem}
+    .pill{display:inline-flex; align-items:center; padding:4px 10px; border-radius:999px; border:1px solid rgba(177,138,42,.20); color:var(--gold); background:rgba(255,255,255,.65); font-weight:900; letter-spacing:.10em; font-size:.76rem}
+    .card h2{margin:10px 0 8px; font-family:"Noto Serif TC",serif; letter-spacing:.06em; line-height:1.4; font-size:1.22rem}
+    .excerpt{margin:0; color:rgba(31,42,68,.74)}
+    .tags{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px}
+    .tag{font-size:.78rem; color:rgba(31,42,68,.62); border:1px solid rgba(31,42,68,.12); background:rgba(255,255,255,.62); padding:4px 10px; border-radius:999px}
+
+    footer{padding:22px 0 50px; color:rgba(31,42,68,.66); text-align:center}
+    .footer-links{display:flex; justify-content:center; gap:12px 18px; flex-wrap:wrap; margin-bottom:10px}
+
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    @media (max-width:820px){.navlinks{gap:12px; font-size:.92rem}}
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap site-nav">
-      <a class="brand" href="index.html">隨緣堂<small>SUÌ YUÁN TÁNG</small></a>
-      <nav class="nav-links" aria-label="主導覽">
+  <div class="topbar">
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="index.html">隨緣堂<small>SUI YUAN TANG</small></a>
+        <div class="navlinks">
+          <a href="index.html#channels">修行方向</a>
+          <a href="blog.html">道法專欄</a>
+          <a href="yinfu-zhuanlan.html">陰符經專欄</a>
+          <a href="taiyi.html">太乙金華宗旨</a>
+          <a class="cta" href="index.html#consult">線上諮詢</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <header class="hero">
+      <div class="kicker">✦ 文章總覽　可搜尋可篩選 ✦</div>
+      <h1>道法專欄</h1>
+      <p class="sub">你原本的文章都在，只是換成更像部落格的閱讀節奏：先找主題，再慢慢讀深。</p>
+
+      <div class="toolbar">
+        <div class="search" role="search">
+          <span style="font-weight:900;color:rgba(31,42,68,.55)">搜尋</span>
+          <input id="q" type="search" placeholder="輸入關鍵字：符法、養氣、回光、齋戒…" autocomplete="off" />
+        </div>
+        <div class="filters" aria-label="欄位篩選">
+          <button class="chip active" type="button" data-col="道法">道法</button>
+          <button class="chip" type="button" data-col="全部">全部</button>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </section>
+
+    <footer>
+      <div class="footer-links">
         <a href="index.html">首頁</a>
         <a href="yinfu-zhuanlan.html">陰符經專欄</a>
         <a href="taiyi.html">太乙金華宗旨</a>
-        <a class="nav-cta" href="index.html#contact">立即聯絡</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <div class="card hero-box">
-        <span class="eyebrow">文章總覽與快速搜尋</span>
-        <h1>道法專欄</h1>
-        <p>這一頁把既有文章整理成更容易瀏覽的總覽頁。除了保留原本的文章內容，也新增關鍵字搜尋、主題標籤與更清楚的閱讀動線，讓第一次來訪的人更容易找到自己要看的內容。</p>
-
-        <div class="tools">
-          <div class="search-wrap">
-            <input id="searchInput" class="search" type="search" placeholder="搜尋文章標題、摘要或標籤，例如：養氣、收驚、清靜、家宅" />
-            <div class="tags" id="tagFilters"></div>
-          </div>
-          <div id="resultSummary" class="summary">載入中...</div>
-        </div>
-        <div style="margin-top:24px;color:var(--muted);max-width:880px">
-          <p>本專欄特別整理常見搜尋主題，例如道教打坐、胎息、養氣、收驚、祭改、補運、家宅淨化、風水氣場、符咒、避邪、太乙金華宗旨與道家修行。你可以直接輸入關鍵字，快速找到最接近問題的文章。</p>
-        </div>
       </div>
-    </section>
-
-    <section class="layout">
-      <div id="postList" class="list"></div>
-
-      <aside class="side">
-        <div class="card side-card">
-          <h3>怎麼用這頁</h3>
-          <ul>
-            <li>先用搜尋找你在意的主題，例如收驚、風水、清靜、養氣。</li>
-            <li>再用標籤快速縮小到特定類型的文章。</li>
-            <li>如果看完後想進一步談，可以直接回首頁聯絡區。</li>
-          </ul>
-        </div>
-        <div class="card side-card">
-          <h3>延伸閱讀</h3>
-          <ul>
-            <li><a href="yinfu-zhuanlan.html">陰符經專欄</a>：偏經典義理與治心應世。</li>
-            <li><a href="taiyi.html">太乙金華宗旨</a>：偏單一主題深讀。</li>
-            <li><a href="index.html#contact">聯絡表單</a>：看完文章後可直接整理問題。</li>
-          </ul>
-        </div>
-      </aside>
-    </section>
+      <div>隨緣堂 Sui Yuan Tang</div>
+    </footer>
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <span>隨緣堂道法專欄副本改版</span>
-      <span><a href="index.html">首頁</a> ・ <a href="mailto:jackkok1888@gmail.com">jackkok1888@gmail.com</a></span>
-    </div>
-  </footer>
-
   <script>
-    const fallbackArticles = [
-      {
-        title: "九竅的重要性：道家三關九竅，決生死，處百病",
-        column: "道法",
-        url: "jiuqiao-zhongyaoxing.html",
-        date: "2025-05-28",
-        excerpt: "整理道家三關九竅的核心觀念，從任督沖三脈、三丹田、三關到九竅位置與作用，並補入封閉禦邪與開啟通靈的性命修煉邏輯。",
-        tags: ["九竅", "道家", "養生"]
-      },
-      {
-        title: "道法與養生：為何真正的修行，最後都回到日常",
-        column: "道法",
-        url: "daofa-yangsheng-richang.html",
-        date: "2025-05-12",
-        excerpt: "從收驚、祭改、養氣、養生與日常修持談起，說明真正的道法最後都會落回生活本身。",
-        tags: ["養生", "修行", "道法"]
-      }
-    ];
+    var items=[];
+    var activeCol='道法';
 
-    let allArticles = [];
-    let activeTag = "全部";
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g,function(c){
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]);
+      });
+    }
+    function escapeAttr(s){return String(s).replace(/"/g,'&quot;');}
 
-    const searchInput = document.getElementById("searchInput");
-    const tagFilters = document.getElementById("tagFilters");
-    const resultSummary = document.getElementById("resultSummary");
-    const postList = document.getElementById("postList");
-
-    function normalizeText(value) {
-      return String(value || "").toLowerCase();
+    function matchesQuery(item, q){
+      if(!q) return true;
+      q=q.toLowerCase();
+      var hay=[item.title,item.excerpt,(item.tags||[]).join(' ')].join(' ').toLowerCase();
+      return hay.indexOf(q) !== -1;
     }
 
-    function renderTags(items) {
-      const tagCounts = new Map();
-      items.forEach((item) => {
-        (item.tags || []).forEach((tag) => {
-          tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    function render(){
+      var q=document.getElementById('q').value.trim();
+      var grid=document.getElementById('grid');
+      var filtered=items
+        .filter(function(x){
+          if(!x||!x.url) return false;
+          if(activeCol!=='全部' && String(x.column||'')!==activeCol) return false;
+          return matchesQuery(x,q);
+        })
+        .sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
+
+      grid.innerHTML = filtered.map(function(x){
+        var tags=(x.tags||[]).slice(0,6).map(function(t){return '<span class="tag">'+escapeHtml(String(t))+'</span>';}).join('');
+        return (
+          '<a class="card" href="'+escapeAttr(x.url)+'">'
++           '<div class="meta"><span class="pill">'+escapeHtml(String(x.column||'專欄'))+'</span><span>'+escapeHtml(String(x.date||''))+'</span></div>'
++           '<h2>'+escapeHtml(String(x.title||''))+'</h2>'
++           '<p class="excerpt">'+escapeHtml(String(x.excerpt||''))+'</p>'
++           '<div class="tags">'+tags+'</div>'
++         '</a>'
+        );
+      }).join('');
+
+      if(filtered.length===0){
+        grid.innerHTML = '<div class="card"><div class="meta"><span class="pill">查無結果</span></div><h2>沒有符合的文章</h2><p class="excerpt">請換個關鍵字，或切換「全部」。</p></div>';
+      }
+    }
+
+    function setActiveChip(col){
+      activeCol=col;
+      document.querySelectorAll('.chip').forEach(function(btn){
+        btn.classList.toggle('active', btn.getAttribute('data-col')===col);
+      });
+      render();
+    }
+
+    (function(){
+      document.getElementById('q').addEventListener('input', function(){
+        window.clearTimeout(window.__qTimer);
+        window.__qTimer = window.setTimeout(render, 80);
+      });
+
+      document.querySelectorAll('.chip').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          setActiveChip(btn.getAttribute('data-col'));
         });
       });
 
-      const topTags = [...tagCounts.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 8)
-        .map(([tag]) => tag);
-
-      const tags = ["全部", ...topTags];
-      tagFilters.innerHTML = tags.map((tag) => `
-        <button class="tag-btn ${tag === activeTag ? "active" : ""}" type="button" data-tag="${tag}">${tag}</button>
-      `).join("");
-
-      tagFilters.querySelectorAll(".tag-btn").forEach((button) => {
-        button.addEventListener("click", () => {
-          activeTag = button.dataset.tag;
-          renderTags(allArticles);
-          renderPosts();
+      fetch('articles.json', {cache:'no-store'})
+        .then(function(r){return r.json();})
+        .then(function(data){items=data||[]; render();})
+        .catch(function(){
+          document.getElementById('grid').innerHTML = '<div class="card"><div class="meta"><span class="pill">錯誤</span></div><h2>文章載入失敗</h2><p class="excerpt">請稍後再試。</p></div>';
         });
-      });
-    }
-
-    function renderPosts() {
-      const keyword = normalizeText(searchInput.value);
-      const filtered = allArticles.filter((item) => {
-        const haystack = normalizeText([
-          item.title,
-          item.excerpt,
-          item.column,
-          ...(item.tags || [])
-        ].join(" "));
-
-        const matchKeyword = !keyword || haystack.includes(keyword);
-        const matchTag = activeTag === "全部" || (item.tags || []).includes(activeTag);
-        return matchKeyword && matchTag;
-      });
-
-      resultSummary.textContent = `共 ${filtered.length} 篇符合，目前總計 ${allArticles.length} 篇文章`;
-
-      if (!filtered.length) {
-        postList.innerHTML = '<div class="card empty">目前沒有符合的文章，試著換個關鍵字或取消標籤。</div>';
-        return;
-      }
-
-      postList.innerHTML = filtered.map((item) => `
-        <article class="card post">
-          <div class="post-meta"><span>${item.column}</span><span>${item.date}</span></div>
-          <h2><a href="${item.url}">${item.title}</a></h2>
-          <p>${item.excerpt}</p>
-          <div class="post-footer">
-            <div class="tag-list">${(item.tags || []).slice(0, 5).map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}</div>
-            <a class="more" href="${item.url}">閱讀全文 →</a>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function updateCollectionSchema(items) {
-      const schema = document.getElementById("blog-itemlist-schema");
-      if (!schema) return;
-
-      const topItems = items.slice(0, 20).map((item, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "url": `https://eason1388.github.io/sov13/${item.url}`,
-        "name": item.title
-      }));
-
-      schema.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "隨緣堂道法專欄文章列表",
-        "numberOfItems": items.length,
-        "itemListElement": topItems
-      });
-    }
-
-    async function init() {
-      try {
-        const response = await fetch("articles.json");
-        allArticles = await response.json();
-      } catch (error) {
-        allArticles = fallbackArticles;
-      }
-
-      updateCollectionSchema(allArticles);
-      renderTags(allArticles);
-      renderPosts();
-    }
-
-    searchInput.addEventListener("input", renderPosts);
-    init();
+    })();
   </script>
 </body>
 </html>
