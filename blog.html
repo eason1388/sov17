@@ -38,6 +38,8 @@
       margin:0;
       font-family:"Noto Sans TC",sans-serif;
       color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       background:
         radial-gradient(circle at 12% 10%, rgba(31,143,149,.10), transparent 42%),
         radial-gradient(circle at 88% 12%, rgba(177,138,42,.10), transparent 45%),
@@ -211,33 +213,47 @@
       var t1=String((item && item.column) || '隨緣堂');
       var t2=String((item && item.tags && item.tags[1]) || '玄門');
       var a=hash(seed)%360;
-      var b=(a+68)%360;
+      var b=(a+56)%360;
+      var c=(a+112)%360;
       var svg=
         '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"540\" viewBox=\"0 0 960 540\">'+
           '<defs>'+
             '<linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">'+
-              '<stop offset=\"0\" stop-color=\"hsl('+a+',55%,88%)\"/>'+
-              '<stop offset=\"1\" stop-color=\"hsl('+b+',55%,86%)\"/>'+
+              '<stop offset=\"0\" stop-color=\"hsl('+a+',25%,14%)\"/>'+
+              '<stop offset=\"0.55\" stop-color=\"hsl('+b+',22%,16%)\"/>'+
+              '<stop offset=\"1\" stop-color=\"hsl('+c+',22%,18%)\"/>'+
             '</linearGradient>'+
-            '<radialGradient id=\"r\" cx=\"72%\" cy=\"28%\" r=\"70%\">'+
-              '<stop offset=\"0\" stop-color=\"rgba(31,143,149,.26)\"/>'+
-              '<stop offset=\"1\" stop-color=\"rgba(31,42,68,0)\"/>'+
+            '<radialGradient id=\"r\" cx=\"72%\" cy=\"26%\" r=\"72%\">'+
+              '<stop offset=\"0\" stop-color=\"rgba(217,180,90,.34)\"/>'+
+              '<stop offset=\"0.35\" stop-color=\"rgba(31,143,149,.16)\"/>'+
+              '<stop offset=\"1\" stop-color=\"rgba(0,0,0,0)\"/>'+
             '</radialGradient>'+
+            '<filter id=\"grain\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\">'+
+              '<feTurbulence type=\"fractalNoise\" baseFrequency=\".95\" numOctaves=\"2\" stitchTiles=\"stitch\"/>'+
+              '<feColorMatrix type=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .12 0\"/>'+
+            '</filter>'+
+            '<linearGradient id=\"line\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">'+
+              '<stop offset=\"0\" stop-color=\"rgba(255,255,255,0)\"/>'+
+              '<stop offset=\"0.25\" stop-color=\"rgba(255,255,255,.08)\"/>'+
+              '<stop offset=\"0.75\" stop-color=\"rgba(255,255,255,.08)\"/>'+
+              '<stop offset=\"1\" stop-color=\"rgba(255,255,255,0)\"/>'+
+            '</linearGradient>'+
           '</defs>'+
           '<rect width=\"960\" height=\"540\" fill=\"url(#g)\"/>'+
           '<rect width=\"960\" height=\"540\" fill=\"url(#r)\"/>'+
-          '<g opacity=\".26\">'+
-            '<path d=\"M-20 396 C120 316 240 316 340 368 C430 410 560 434 690 376 C790 336 860 336 980 376 L980 580 L-20 580 Z\" fill=\"rgba(31,42,68,.18)\"/>'+
-            '<path d=\"M-20 440 C120 372 250 372 360 424 C468 476 620 500 760 454 C860 422 900 422 980 454 L980 580 L-20 580 Z\" fill=\"rgba(31,42,68,.12)\"/>'+
+          '<rect width=\"960\" height=\"540\" filter=\"url(#grain)\" opacity=\".9\"/>'+
+          '<g fill=\"none\" stroke=\"url(#line)\" stroke-width=\"2\" opacity=\".9\">'+
+            '<path d=\"M-30 190 C150 150 300 150 430 180 C590 214 720 214 900 176\"/>'+
+            '<path d=\"M-30 248 C140 210 320 210 480 236 C640 262 760 262 930 234\" opacity=\".75\"/>'+
+            '<path d=\"M-30 308 C160 270 340 270 520 300 C680 326 800 326 940 296\" opacity=\".55\"/>'+
           '</g>'+
-          '<g font-family=\"Noto Serif TC,serif\" font-weight=\"900\" opacity=\".92\">'+
-            '<text x=\"44\" y=\"78\" font-size=\"26\" fill=\"rgba(31,42,68,.72)\" letter-spacing=\"6\">'+escSvg(t1)+'</text>'+
-            '<text x=\"44\" y=\"124\" font-size=\"42\" fill=\"rgba(177,138,42,.82)\" letter-spacing=\"10\">'+escSvg(t2)+'</text>'+
+          '<g opacity=\".92\" font-family=\"Noto Serif TC,serif\" font-weight=\"900\">'+
+            '<text x=\"44\" y=\"74\" font-size=\"24\" fill=\"rgba(255,255,255,.78)\" letter-spacing=\"6\">'+escSvg(t1)+'</text>'+
+            '<text x=\"44\" y=\"122\" font-size=\"40\" fill=\"rgba(217,180,90,.92)\" letter-spacing=\"10\">'+escSvg(t2)+'</text>'+
           '</g>'+
-          '<g opacity=\".22\">'+
-            '<circle cx=\"822\" cy=\"102\" r=\"58\" fill=\"none\" stroke=\"rgba(31,42,68,.28)\" stroke-width=\"2\"/>'+
-            '<circle cx=\"822\" cy=\"102\" r=\"38\" fill=\"none\" stroke=\"rgba(31,143,149,.22)\" stroke-width=\"2\"/>'+
-            '<path d=\"M822 62 C842 62 854 78 854 92 C854 104 846 114 834 120 C822 126 814 134 814 148\" fill=\"none\" stroke=\"rgba(177,138,42,.28)\" stroke-width=\"2.5\"/>'+
+          '<g opacity=\".55\">'+
+            '<circle cx=\"830\" cy=\"100\" r=\"54\" fill=\"none\" stroke=\"rgba(255,255,255,.14)\" stroke-width=\"2\"/>'+
+            '<circle cx=\"830\" cy=\"100\" r=\"36\" fill=\"none\" stroke=\"rgba(31,143,149,.20)\" stroke-width=\"2\"/>'+
           '</g>'+
         '</svg>';
       return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
