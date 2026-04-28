@@ -1159,6 +1159,65 @@
           return String(txt || '').split(/\n\n+/).map(function(p){return p.trim();}).filter(Boolean);
         }
 
+        // 使用者最新要求：玄學不是「拜拜問神/擲筊」；因此把此類內容整段移除，
+        // 改成「符法、科儀、改運」等可落地介入。這裡用後處理統一清掉相關段落。
+        var KEY_DIVINATION = /擲筊|擲杯|聖杯|笑杯|陰杯|問神|求籤|抽籤|杯示|筊示/;
+        var KEY_WORSHIP = /上香|清香|香三炷|三炷|一炷|焚香|到廟|廟前|拜月老|拜土地公|拜文昌|拜關聖|拜城隍|拜財神|拜魁星|拜觀音|拜媽祖|稟告(?!.*上表)/;
+        // 只要是「道長依法上表/科儀/符法」可保留，即便含神名；其餘以拜拜祈求為主的段落移除。
+        var KEY_RETAIN_RITUAL = /道長|法師|科儀|法事|上表|疏文|符|鎮宅|淨宅|收驚|安神|補財庫|禮斗|安太歲|解冤|解結|開路|解關口|和合|斬桃花/;
+
+        function ritualReplacement(n){
+          // 統一補上一段「符科可做什麼」：避免移除後字數不足，也符合使用者要的玄學定義
+          if(n>=1 && n<=10){
+            return '玄學介入不走問神擲筊，而走「符科改運」：可請正派道長依命局與現況下「開路符／轉運符／化小人符／安神符」等（名稱各派不同），並配合簡科上表，目的在清障開門、扶正氣、止內耗。符不是替你做決定，而是把阻滯打開，讓你照既定規劃走得更順。';
+          }
+          if(n>=11 && n<=17){
+            return '玄學介入以「斷執解結」為主：可請正派道長行解結科、和合科或斬外緣/斷惡緣科（依情況與派別），並配合安神符，讓情緒不被牽引、界線立得住。道教法事的重點是扶正與清場，不是用法術綁人；綁人多反噬，正派師父也不會這樣做。';
+          }
+          if(n>=18 && n<=20){
+            return '玄學介入以「安神定魄」為主：可請正派道長視情況給安神符、定心符，或行簡式文昌/開智科（依師承），目的在讓你睡得著、心不亂、臨場不失常。符科扶的是你的精氣神，功課仍要你自己做足。';
+          }
+          if(n>=21 && n<=24){
+            return '玄學介入以「安神、延生、消災」為主：可請正派道長行延生科、消災解厄科、安神收驚，必要時配合淨宅鎮宅符，讓人與宅都回正位。切記急症與術後照護以醫療為先，道教符科是扶正助緣，不替代醫療。';
+          }
+          if(n>=25 && n<=29){
+            return '玄學介入以「安宅安胎、調家氣」為主：可請正派道長行淨宅、安土地、鎮宅符；求子與安胎則可行祈福疏文或安胎科（依派別），並配合安神符。符與科儀要對症下法，切忌自行網購亂貼，容易擾氣。';
+          }
+          if(n>=30 && n<=50){
+            return '玄學介入以「清障扶正」為主：安太歲、禮斗、補運、解口舌、化小人、開路解關口等，皆由正派道長依情況施作。原則是先把法律/制度/財務風控的陽面程序做足，再以科儀扶心扶氣，讓你在關口不失主位。';
+          }
+          if(n>=51 && n<=62){
+            return '玄學介入以「和解與安置」為主：收驚安神、淨宅鎮煞、解冤釋結、超薦迴向、補運禮斗等，重點在立界線、清場域、扶正氣。正派做法不靠恐嚇與交易，而是以疏文上表、戒行配合、功德迴向來轉氣。';
+          }
+          return '玄學介入以「立界與扶正」為核心：若要修符法、科儀、內煉，務必求正派師承、守戒守規矩；需要處理擾心擾宅者，可請正派道長安神、淨宅、立界鎮符。越進階越要清明，不追刺激不沉迷名相，才走得長久。';
+        }
+
+        function stripDivination(n, txt){
+          var paras = splitParas(txt);
+          var kept = [];
+          var removed = 0;
+          paras.forEach(function(p){
+            var hitDiv = KEY_DIVINATION.test(p);
+            var hitWorship = KEY_WORSHIP.test(p);
+            var keepRitual = KEY_RETAIN_RITUAL.test(p);
+            // 移除：擲筊/問神；或以拜拜稟告為主且不包含符科/科儀的段落
+            if(hitDiv || (hitWorship && !keepRitual)){
+              removed++;
+              return;
+            }
+            kept.push(p);
+          });
+          // 若移除太多導致玄學段落變薄，補上一段符科介入說明
+          var hasXuan = kept.some(function(p){ return KEY_XUAN.test(p) || KEY_RETAIN_RITUAL.test(p); });
+          if(removed > 0 && !hasXuan){
+            kept.push(ritualReplacement(n));
+          }else if(removed > 0){
+            // 即使已有玄學段落，也補一段，避免留下拜拜語感
+            kept.push(ritualReplacement(n));
+          }
+          return kept.join('\n\n');
+        }
+
         function uniqPush(arr, p){
           if(!p) return;
           if(arr.indexOf(p) !== -1) return;
@@ -1269,6 +1328,8 @@
           if(!A[n]) continue;
           // 先全題重排成 氣→命理→玄學，再補足字數
           A[n] = reorderToQiMingXuan(n, A[n]);
+          // 清除「拜拜問神/擲筊」類段落，改成符科改運敘述
+          A[n] = stripDivination(n, A[n]);
           A[n] = ensureMinLen(n, A[n]);
         }
       })();
