@@ -1149,6 +1149,74 @@
 
       // 文字長度補強（每題至少約 520 字）：加上可落地的道教操作細節與禁忌，避免空泛補字。
       (function(){
+        // 依使用者要求：先談「個人先天之氣」→再談「命理（時機/方向）」→最後才談「玄學/道教符科」。
+        // 這裡用段落分類與重排，讓所有題目語序一致且更像玄門的正道流程。
+        var KEY_QI = /作息|睡眠|飲食|運動|壓力|情緒|身心|精氣神|呼吸|吐納|早睡|熬夜|焦慮|憂鬱|日光|曬光|規律|戒酒|戒色|體力|營養|腸胃|復健|醫囑|醫療|就醫|健康/;
+        var KEY_MINGLI = /八字|命盤|用神|五行|流年|行運|太歲|飛星|宅向|坐向|擇日|沖煞|三煞|五黃/;
+        var KEY_XUAN = /道教|符|科儀|法事|禮斗|北斗|安太歲|補財庫|收驚|淨宅|鎮宅|安土地|門神|疏文|上表|迴向|超薦|解冤|解結|護身符|安神符|開路|解關口/;
+
+        function splitParas(txt){
+          return String(txt || '').split(/\n\n+/).map(function(p){return p.trim();}).filter(Boolean);
+        }
+
+        function uniqPush(arr, p){
+          if(!p) return;
+          if(arr.indexOf(p) !== -1) return;
+          arr.push(p);
+        }
+
+        function classify(p){
+          var isQi = KEY_QI.test(p);
+          var isM = KEY_MINGLI.test(p);
+          var isX = KEY_XUAN.test(p);
+          if(isQi && !isM && !isX) return 'qi';
+          if(isM && !isX) return 'mingli';
+          if(isX) return 'xuan';
+          // 未命中者多半是通用觀念，依題目多落在「氣」之後、「命理」之前
+          return 'core';
+        }
+
+        function stageIntro(n){
+          // 類別提示：避免加太多「多餘字」，但明確呈現氣→命理→玄學的正道順序
+          if(n>=21 && n<=26){
+            return '這類事先守「氣」：身體與情緒是命的承載。先把作息、睡眠、醫囑與照護做穩，先天之氣回正，後面再談命理與科儀才有效。';
+          }
+          if(n>=27 && n<=37){
+            return '這類事先守「氣」：人住在宅裡，宅也住在人心。先把採光通風、潮濕雜亂與生活節奏處理好，先天之氣不被耗，命理看時機方向才準，符科也才扶得住。';
+          }
+          if(n>=51){
+            return '越進階的玄學議題，越要先守「氣」。先天之氣若亂，感受易偏、恐懼易生。先把身心與戒行立住，再以命理定節點、再用正派道教科儀處理，才是正道。';
+          }
+          return '先談「氣」再談「命」：先天之氣穩了，命理才看得準、玄學才扶得住。這題先從精氣神與生活結構下手，再看行運方向，最後才談道教符科的助緣。';
+        }
+
+        function reorderToQiMingXuan(n, txt){
+          var paras = splitParas(txt);
+          var qi=[], core=[], ming=[], xuan=[];
+          paras.forEach(function(p){
+            var c = classify(p);
+            if(c==='qi') uniqPush(qi,p);
+            else if(c==='mingli') uniqPush(ming,p);
+            else if(c==='xuan') uniqPush(xuan,p);
+            else uniqPush(core,p);
+          });
+
+          // 若原文把符科放太前面，這裡會自動移到後段；同時把「核心觀念」放在氣之後。
+          var out=[];
+          uniqPush(out, stageIntro(n));
+          qi.forEach(function(p){uniqPush(out,p);});
+          core.forEach(function(p){uniqPush(out,p);});
+          if(ming.length){
+            uniqPush(out, '命理在此用來看「時機與方向」：你適合先守成還是先進取、什麼節點宜動不宜動，交給八字行運與流年去校準。');
+            ming.forEach(function(p){uniqPush(out,p);});
+          }
+          if(xuan.length){
+            uniqPush(out, '玄學與道教在此是「扶正助緣」：符是立界，科儀是清場，上表是請神明作證；但一切仍以守正守戒為前提，才不顛倒本末。');
+            xuan.forEach(function(p){uniqPush(out,p);});
+          }
+          return out.join('\n\n');
+        }
+
         function byRange(n){
           if(n>=1 && n<=10) return [
             '具體做法可加一個「三日定神」：連續三天晨起先喝溫水，面向東南合掌稟告文昌或關聖，願我心神不亂、判斷不偏；再寫下三條底線（不借錢硬撐、不情緒辭職、不衝動加碼），貼在桌前。每晚睡前誦《清靜經》一段，讓心歸一。職途之事，先守規矩，神明才好護你。',
@@ -1199,6 +1267,8 @@
 
         for(var n=1; n<=70; n++){
           if(!A[n]) continue;
+          // 先全題重排成 氣→命理→玄學，再補足字數
+          A[n] = reorderToQiMingXuan(n, A[n]);
           A[n] = ensureMinLen(n, A[n]);
         }
       })();
