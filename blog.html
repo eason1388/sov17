@@ -264,6 +264,9 @@
       }
       return arr;
     }
+    var coverOverrides={
+      'chenchuang-naqi-kaiyou-shouming':'assets/photos/cover-39.jpg'
+    };
     function hash(str){
       var h=2166136261;
       for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}
@@ -298,7 +301,7 @@
       var covers=shuffledCoverPool(activeCol+'|'+q+'|'+filtered.length);
       grid.innerHTML = filtered.map(function(x,i){
         var tags=(x.tags||[]).slice(0,6).map(function(t){return '<span class="tag">'+escapeHtml(String(t))+'</span>';}).join('');
-        var cover=covers[i % covers.length];
+        var cover=coverOverrides[x.id] || covers[i % covers.length];
         return (
           '<a class="card" href="'+escapeAttr(x.url)+'">'
  +         '<div class="card-cover"><img alt="" loading="lazy" src="'+escapeAttr(cover)+'"/></div>'
